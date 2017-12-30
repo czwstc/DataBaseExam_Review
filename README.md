@@ -72,7 +72,7 @@
 
 > ##### 	E-R图
 
-​		![练习图](https://github.com/czwstc/DataBaseExam_Review/完整.png)
+​		![练习图](/Users/czwstc/Documents/GitHub/DataBaseExam_Review/完整.png)
 
 ##### 5.关系的键
 
@@ -92,9 +92,9 @@
 
 ​	查询计算机系的全体学生：
 
-​	![查询1](https://github.com/czwstc/DataBaseExam_Review/查询1.jpg)
+​	![查询1](/Users/czwstc/Documents/GitHub/DataBaseExam_Review/查询1.jpg)
 
-![查询2](https://github.com/czwstc/DataBaseExam_Review/查询2.jpg)
+![查询2](/Users/czwstc/Documents/GitHub/DataBaseExam_Review/查询2.jpg)
 
 ​	投影：选择出若干属性列，组成新的关系
 
