@@ -72,7 +72,7 @@
 
 > ##### 	E-R图
 
-​		![练习图](/Users/czwstc/Documents/GitHub/DataBaseExam_Review/完整.png)
+​		![E_R](https://github.com/czwstc/DataBaseExam_Review/blob/master/photo/完整.png)
 
 ##### 5.关系的键
 
@@ -92,25 +92,25 @@
 
 ​	查询计算机系的全体学生：
 
-​	![查询1](/Users/czwstc/Documents/GitHub/DataBaseExam_Review/查询1.jpg)
+​	![查询1](https://github.com/czwstc/DataBaseExam_Review/blob/master/photo/查询1.jpg)
 
-![查询2](/Users/czwstc/Documents/GitHub/DataBaseExam_Review/查询2.jpg)
+![查询2](https://github.com/czwstc/DataBaseExam_Review/blob/master/photo/查询2.jpg)
 
 ​	投影：选择出若干属性列，组成新的关系
 
-​	![投影](/Users/czwstc/Documents/GitHub/DataBaseExam_Review/投影.jpg)
+​	![投影](https://github.com/czwstc/DataBaseExam_Review/blob/master/photo/投影.jpg)
 
-![投影2](/Users/czwstc/Documents/GitHub/DataBaseExam_Review/投影2.jpg)
+![投影2](https://github.com/czwstc/DataBaseExam_Review/blob/master/photo/投影2.jpg)
 
-​	连接：等值连接中属性名可以不同，自然（*）就一定要相同。![连接](/Users/czwstc/Documents/GitHub/DataBaseExam_Review/连接.jpg)
+​	连接：等值连接中属性名可以不同，自然（*）就一定要相同。![连接](https://github.com/czwstc/DataBaseExam_Review/blob/master/photo/连接.jpg)
 
 ​	如何用？
 
-![查询](/Users/czwstc/Documents/GitHub/DataBaseExam_Review/查询.jpg)
+![查询](https://github.com/czwstc/DataBaseExam_Review/blob/master/photo/查询.jpg)
 
-![table1](/Users/czwstc/Documents/GitHub/DataBaseExam_Review/table1.png)
+![table1](https://github.com/czwstc/DataBaseExam_Review/blob/master/photo/table1.png)
 
-![陈](/Users/czwstc/Documents/GitHub/DataBaseExam_Review/陈.jpg)
+![陈](https://github.com/czwstc/DataBaseExam_Review/blob/master/photo/陈.jpg)
 
 ##### 语句：
 
