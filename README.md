@@ -1,4 +1,4 @@
-## 数据库复习
+##  数据库复习
 
 辨别：规范化原理 12% 
 
@@ -73,3 +73,73 @@
 > ##### 	E-R图
 
 ​		![练习图](/Users/czwstc/Documents/GitHub/DataBaseExam_Review/完整.png)
+
+##### 5.关系的键
+
+​	候选键：唯一标示关系中元组的属性或属性集。
+
+​	主键：多个候选键可以选一个座位查询、删除的操作变量的，称为 主关系键（主键）
+
+​	主属性：包含在主键中的属性。
+
+​	实体完整性和参照完整性：实体就是主键不为空。
+
+##### 6.关系代数
+
+​	σ(选择)，∏（投影），∞（连接），*（自然连接），÷（除）；	
+
+​	∧（与）,∨（或）,┐（非）
+
+​	查询计算机系的全体学生：
+
+​	![查询1](/Users/czwstc/Documents/GitHub/DataBaseExam_Review/查询1.jpg)
+
+![查询2](/Users/czwstc/Documents/GitHub/DataBaseExam_Review/查询2.jpg)
+
+​	投影：选择出若干属性列，组成新的关系
+
+​	![投影](/Users/czwstc/Documents/GitHub/DataBaseExam_Review/投影.jpg)
+
+![投影2](/Users/czwstc/Documents/GitHub/DataBaseExam_Review/投影2.jpg)
+
+​	连接：等值连接中属性名可以不同，自然（*）就一定要相同。![连接](/Users/czwstc/Documents/GitHub/DataBaseExam_Review/连接.jpg)
+
+​	如何用？
+
+![查询](/Users/czwstc/Documents/GitHub/DataBaseExam_Review/查询.jpg)
+
+![table1](/Users/czwstc/Documents/GitHub/DataBaseExam_Review/table1.png)
+
+![陈](/Users/czwstc/Documents/GitHub/DataBaseExam_Review/陈.jpg)
+
+##### 语句：
+
+​	整数：INT 浮点数：FLOAT 时间：DATETIME 字符串：CHAR 、VARCHAR
+
+​	SQL：
+
+CREATE TABLE 表名 ( 列名 数据类型 （default）（列约束）， 列名 数据类型 （列约束）)
+
+```Sql
+USE STUDENT
+CREATE TABLE S	创建表S
+(SNO CHAR(8) ,	
+SN VARCHAR(20),
+AGE INT,	
+SEX CHAR(2) DEFAULT '男' ,//默认 男
+DEPT VARCHAR(20));
+
+```
+
+约束：NULL/NOT NULL 非空，UNIQUE约束 PRIMARY KEY约束。unique可以有多个，primary只能有一个。
+
+```sql
+USE STUDENT
+CREATE TABLE S
+(SNO CHAR(10) NOT NULL ,
+SN CHAR(8) UNIQUE,
+AGE INT,
+SEX CHAR(2) DEFAULT '男' ,
+DEPT VARCHAR(20));  
+```
+
