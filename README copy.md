@@ -62,7 +62,7 @@
 
 ##### 4.E_R概念模型
 
-> 	实体间的联系：
+> ##### 实体间的联系：
 
 ​		一对一联系：（1:1）比如观众与座位
 
@@ -72,7 +72,7 @@
 
 > ##### 	E-R图
 
-​		![E_R](https://github.com/czwstc/DataBaseExam_Review/blob/master/photo/完整.png)
+​		![E_R](/Users/czwstc/Documents/GitHub/DataBaseExam_Review/photo/完整.png)
 
 ##### 5.关系的键
 
@@ -92,25 +92,25 @@
 
 ​	查询计算机系的全体学生：
 
-​	![查询1](https://github.com/czwstc/DataBaseExam_Review/blob/master/photo/查询1.jpg)
+​	![查询1](/Users/czwstc/Documents/GitHub/DataBaseExam_Review/photo/查询1.jpg)
 
-![查询2](https://github.com/czwstc/DataBaseExam_Review/blob/master/photo/查询2.jpg)
+![查询2](/Users/czwstc/Documents/GitHub/DataBaseExam_Review/photo/查询2.jpg)
 
 ​	投影：选择出若干属性列，组成新的关系
 
-​	![投影](https://github.com/czwstc/DataBaseExam_Review/blob/master/photo/投影.jpg)
+​	![投影](/Users/czwstc/Documents/GitHub/DataBaseExam_Review/photo/投影.jpg)
 
-![投影2](https://github.com/czwstc/DataBaseExam_Review/blob/master/photo/投影2.jpg)
+![投影2](/Users/czwstc/Documents/GitHub/DataBaseExam_Review/photo/投影2.jpg)
 
-​	连接：等值连接中属性名可以不同，自然（*）就一定要相同。![连接](https://github.com/czwstc/DataBaseExam_Review/blob/master/photo/连接.jpg)
+​	连接：等值连接中属性名可以不同，自然（*）就一定要相同。![连接](/Users/czwstc/Documents/GitHub/DataBaseExam_Review/photo/连接.jpg)
 
 ​	如何用？
 
-![查询](https://github.com/czwstc/DataBaseExam_Review/blob/master/photo/查询.jpg)
+![查询](/Users/czwstc/Documents/GitHub/DataBaseExam_Review/photo/查询.jpg)
 
-![table1](https://github.com/czwstc/DataBaseExam_Review/blob/master/photo/table1.png)
+![table1](/Users/czwstc/Documents/GitHub/DataBaseExam_Review/photo/table1.png)
 
-![陈](https://github.com/czwstc/DataBaseExam_Review/blob/master/photo/陈.jpg)
+![陈](/Users/czwstc/Documents/GitHub/DataBaseExam_Review/photo/陈.jpg)
 
 ##### 语句：
 
@@ -142,4 +142,28 @@ AGE INT,
 SEX CHAR(2) DEFAULT '男' ,
 DEPT VARCHAR(20));  
 ```
+
+建立一个S表，定义SN+SEX为唯一键。CONSTRAINT S_UNIQ 为 CONSTRAINT 约束名
+
+```
+USE STUDENT
+CREATE TABLE S 
+( SNO CHAR(5),
+SN CHAR(8),
+SEX CHAR(2),
+CONSTRAINT S_UNIQ UNIQUE(SN,SEX));
+```
+
+FOREIGN KEY约束指定某一个列或一组列作为外部键，其中，包含外部键的表称为从表，包含外部键所引用的主键或唯一键的表称主表。
+
+```sql
+USE STUDENT
+CREATE TABLE SC
+(SNO CHAR(5) NOT NULL CONSTRAINT S_FORE FOREIGN KEY REFERENCES S(SNO),
+CNO CHAR(5) NOT NULL CONSTRAINT C_FORE FOREIGN KEY REFERENCES C(CNO),
+SCORE NUMERIC(3),
+CONSTRAINT S_C_PRIM PRIMARY KEY (SNO,CNO));
+```
+
+CHECK约束用来检查字段值所允许的范围，如，一个字段只能输入整数，而且限定在0-100的整数，以此来保证域的完整性。[ CONSTRAINT<约束名>] CHECK (<条件>)
 
