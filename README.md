@@ -431,5 +431,40 @@ HAVING子句去掉不满足COUNT（*）>=2的组。
 
 HAVING子句作用于组，选择满足条件的组，必须用于GROUP BY子句之后，但GROUP BY子句可没有HAVING子句。
 
+求选课在三门以上且各门课程均及格的学生的学号及其总成绩，查询结果按总成绩降序列出。
+SELECT SNO,SUM(SCORE) AS TotalScore  FROM SC
+WHERE SCORE>=60
+GROUP BY SNO
+HAVING COUNT(*)>=3
+ORDER BY SUM(SCORE) DESC
+
+此语句为分组排序，执行过程如下：
+1.（FROM）取出整个SC
+2.（WHERE）筛选SCORE>=60的元组
+3.（GROUP BY）将选出的元组按SNO分组
+4.（HAVING）筛选选课三门以上的分组
+5.（SELECT）以剩下的组中提取学号和总成绩
+6.（ORDER BY）将选取结果排序
+
+
+SELECT S.SNO,SN,CN,SCORE
+FROM S,C,SC
+WHERE S.SNO=SC.SNO AND SC.CNO=C.CNO
+
+
+检索所有学生姓名，年龄和选课名称。
+方法1：
+SELECT SN,AGE,CN
+FROM S,C,SC
+WHERE S.SNO=SC.SNO AND SC.CNO=C.CNO
+
+查询与刘伟教师职称相同的教师号、姓名。
+SELECT TNO,TN
+FROM T
+WHERE PROF=(SELECT PROF 
+FROM T
+WHERE TN='刘伟')
+
+
 ```
 
