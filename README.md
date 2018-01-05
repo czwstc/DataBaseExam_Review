@@ -190,9 +190,11 @@ DEPT CHAR(10) CONSTRAINT DEPT_CONS NOT NULL);
 
 SQL语言使用ALTER TABLE命令来完成修改基本表，有如下三种修改方式：
 
+SQL语言使用ALTER TABLE命令来完成修改基本表，有如下三种修改方式：
+
 1.ADD方式
 
-```Sql
+```sql
 USE STUDENT
 ALTER TABLE S 
 （添加字段）
@@ -204,4 +206,188 @@ CONSTRAINT SCORE_CHK CHECK(SCORE BETWEEN 0 AND 100)
 
 ```
 
-​	
+2.ALTER 方式	
+
+> ​	（只能修改NULL|NOT NULL约束，其它类型的约束在修改之前必须先删除，然后再重新添加修改过的约束定义。 ）
+
+把S表中的SNO列加宽到8位字符宽度
+
+```sql
+USE STUDENT
+ALTER TABLE S 
+ALTER COLUMN
+SNO CHAR(8)
+```
+
+3.DROP方式
+
+```sql
+USE STUDENT
+ALTER TABLE S
+DROP 
+CONSTRAINT AGE_CHK
+```
+
+删除表STUDENT
+
+```sql
+USE STUDENT 	
+DROP TABLE STUDENT
+```
+
+索引的分类
+
+\1. 按照索引记录的存放位置可分为聚集索引与非聚集索引
+
+Ø聚集索引：按照索引的字段排列记录，并且依照排好的顺序将记录存储在表中。
+
+Ø非聚集索引：按照索引的字段排列记录，但是排列的结果并不会存储在表中，而是另外存储。
+
+\2. 唯一索引的概念
+
+Ø唯一索引表示表中每一个索引值只对应唯一的数据记录，
+
+Ø这与表的PRIMARY KEY的特性类似，因此唯一性索引常用于PRIMARY KEY的字段上，以区别每一笔记录。
+
+Ø当表中有被设置为UNIQUE的字段时，SQL SERVER会自动建立一个非聚集的唯一性索引。
+
+Ø而当表中有PRIMARY KEY的字段时，SQL SERVER会在PRIMARY KEY字段建立一个聚集索引。
+
+\3. 复合索引的概念
+
+Ø复合索引是将两个字段或多个字段组合起来建立的索引，而单独的字段允许有重复的值。
+
+
+
+为表SC在SNO和CNO上建立唯一索引。
+
+```sql
+建立索引的语句是CREATE INDEX，其语法格式为：
+		CREATE [UNIQUE] [CLUSTER] INDEX <索引名> ON <表名> (<列名> [次序] [{,<列名>}] [次序]…)
+USE STUDENT
+CREATE UNIQUE INDEX SCI ON SC(SNO,CNO)
+
+删除表SC的索引SCI		
+DROP INDEX SC.SCI
+```
+
+SELECT 查询
+
+```sql
+SELECT〈列名〉[{，〈列名〉}]
+FROM〈表名或视图名〉[{，〈表名或视图名〉}]
+[WHERE〈检索条件〉]
+[GROUP BY <列名1>[HAVING <条件表达式>]]
+[ORDER BY <列名2>[ASC|DESC]];
+```
+
+完全格式
+
+```sql
+SELECT语句的格式：
+SELECT	[ALL|DISTINCT][TOP N [PERCENT][WITH TIES]]
+列名1 [AS 别名1]
+[, 列名2 [ AS 别名2]…]
+[INTO 新表名]
+FROM 表名 1[[AS] 表1别名]
+[INNER|RIGHT|FULL|OUTER][OUTER]JOIN
+    表名2 [[AS] 表2别名]
+ON 条件
+```
+
+| 运算符            | 含义   |
+| -------------- | ---- |
+| =,>,<,>=,<=,!= | 比较大小 |
+| AND、OR         | 多重条件 |
+| BETWEEN、AND    | 确定范围 |
+| IN             | 确定集合 |
+| LIKE           | 字符匹配 |
+| IS NULL        | 空值   |
+
+```sql
+SELECT SNO,CNO,SCORE FROM SC WHERE
+SCORE>85
+
+SELECT SNO,SCORE FROM SC WHERE CNO=’C1’
+
+
+SELECT SNO，CNO，SCORE
+FROM SC
+WHERE（CNO=’C1’ OR CNO=’C2’） AND SCORE>=85 
+
+
+查询工资在1000至1500之间的教师的教师号、姓名及职称。
+SELECT TNO,TN,PROF
+FROM T
+WHERE SAL BETWEEN 1000 AND 1500
+等价于
+SELECT TNO,TN,PROF
+FROM T
+WHERE SAL>=1000 AND SAL<=1500
+
+```
+
+利用“IN”操作可以查询属性值属于指定集合的元组。
+
+```sql
+查询选修C1或C2的学生的学号、课程号和成绩。
+SELECT SNO, CNO, SCORE 
+FROM SC 
+WHERE CNO IN(‘C1’, ‘C2’)
+此语句也可以使用逻辑运算符“OR”实现。
+SELECT SNO, CNO, SCORE 
+FROM SC 
+WHERE CNO=‘C1’ OR CNO= ‘C2’
+
+```
+
+上例均属于完全匹配查询，当不知道完全精确的値时，用户还可以使用LIKE或NOT LIKE进行部分匹配查询（也称模糊查询）。
+
+LIKE定义的一般格式为：
+
+  <属性名> LIKE <字符串常量>
+
+属性名必须为字符型，字符串常量的字符可以包含如下两个特殊符号：
+
+%：表示任意知长度的字符串；
+
+_：表示任意单个字符。
+
+例3.32 查询所有姓张的教师的教师号和姓名。
+
+```sql
+SELECTTNO, TN 
+FROMT
+WHERETN LIKE ‘张%’
+
+查询姓名中第二个汉字是“力”的教师号和姓名
+SELECT TNO, TN 
+FROM T
+WHERE TN LIKE ‘_ _力%’ 
+一个汉字占两个字符
+
+查询没有考试成绩的学生的学号和相应的课程号
+SELECT SNO, CNO
+FROM SC
+WHERE SCORE IS NULL
+
+```
+
+```sql
+求学号为S1学生的总分和平均分。
+SELECT SUM(SCORE) AS TotalScore, AVG(SCORE) AS AveScore
+FROM SC
+WHERE (SNO = 'S1') 
+
+求选修C1号课程的最高分、最低分及之间相差的分数
+SELECT MAX(SCORE) AS MaxScore, MIN(SCORE) AS MinScore, MAX(SCORE) - MIN(SCORE) 
+      AS Diff
+FROM SC
+WHERE (CNO = 'C1') 
+
+求计算机系学生的总数
+SELECT COUNT(SNO) FROM S
+WHERE DEPT='计算机'
+
+```
+
