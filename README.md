@@ -391,3 +391,45 @@ WHERE DEPT='计算机'
 
 ```
 
+```sql
+例3.38 求学校中共有多少个系
+SELECT COUNT(DISTINCT DEPT) AS DeptNum 
+FROM S
+注意：加入关键字DISTINCT后表示消去重复行，可计算字段“DEPT“不同值的数目。
+COUNT函数对空值不计算，但对零进行计算。
+
+例3.39  统计有成绩同学的人数
+SELECT COUNT (SCORE) 
+FROM SC
+
+上例中成绩为零的同学计算在内，没有成绩（即为空值）的不计算。 
+
+```
+
+分组查询
+
+```sql
+GROUP BY子句可以将查询结果按属性列或属性列组合在行的方向上进行分组，每组在属性列或属性列组合上具有相同的值。
+查询各位教师的教师号及其任课的门数。
+
+SELECT TNO,COUNT(*) AS C_NUM
+FROM TC
+GROUP BY TNO 
+
+若在分组后还要按照一定的条件进行筛选，则需使用HAVING子句。 
+
+例3.43 查询选修两门以上课程的学生学号和选课门数
+SELECT SNO,COUNT(*) AS SC_NUM 
+FROM SC
+GROUP BY SNO       
+HAVING COUNT(*)>=2 
+
+GROUP BY子句按SNO的值分组，所有具有相同SNO的元组为一组，对每一组使用函数COUNT进行计算，统计出每位学生选课的门数。
+HAVING子句去掉不满足COUNT（*）>=2的组。
+
+当在一个SQL查询中同时使用WHERE子句，GROUP  BY 子句和HAVING子句时，其顺序是WHERE－GROUP  BY－ HAVING
+
+HAVING子句作用于组，选择满足条件的组，必须用于GROUP BY子句之后，但GROUP BY子句可没有HAVING子句。
+
+```
+
